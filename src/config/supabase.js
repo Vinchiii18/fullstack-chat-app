@@ -97,4 +97,24 @@ const login = async (email, password) => {
   }
 };
 
-export { signup, login };
+const logout = async () => {
+  try {
+    console.log("logout clicked!");
+    const { error } = await supabase.auth.signOut();
+    console.log("logout success!");
+
+    if (error) {
+      console.error(error);
+      toast.error(error.message);
+      return;
+    }
+
+    toast.success("Logged out successfully!");
+    console.log("User logged out");
+  } catch (error) {
+    console.error(error);
+    toast.error("Something went wrong during logout.");
+  }
+};
+
+export { signup, login, logout };
